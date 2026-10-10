@@ -10,7 +10,7 @@
   Tempo previsto: JSON 10min (maior parte só copiar do html antigo) | componentes 25min | estado/edição 10min | estilo 5min (mantendo o mesmo arquivo de antes, com pequenas alterações)
   IA: Usar IA para criar o esqueleto dos arquivos necessários de componentes jsx e do json de conteúdo, formatação dos copmentários dos passos 1 e 3.
 */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import conteudo from './data/conteudo.json'
 import Cabecalho from './components/Cabecalho.jsx'
 import Secao from './components/Secao.jsx'
@@ -32,11 +32,36 @@ export default function App() {
 
   const editando = abaAtiva === 'editar'
 
+  function aplicarEstado(estado) {
+    setSecoes(atuais => atuais.map(s => ({ ...s, texto: estado.textos[s.id] ?? s.texto })))
+    setEdicoes(estado.edicoes)
+    if (estado.edicoes.length > 0) setDataEdicao(estado.edicoes[estado.edicoes.length - 1])
+  }
+
+  // carrega do servidor os textos já editados e o histórico
+  useEffect(() => {
+    fetch('/api/wiki')
+      .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then(aplicarEstado)
+      .catch(() => {}) // sem servidor: segue com o JSON local
+  }, [])
+
   function trocarAba(id) {
     if (editando && id !== 'editar') {
-      const registro = formatarAgora()
-      setDataEdicao(registro)
-      setEdicoes([...edicoes, registro])
+      const textos = Object.fromEntries(secoes.map(s => [s.id, s.texto]))
+      fetch('/api/wiki', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ textos })
+      })
+        .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+        .then(aplicarEstado)
+        .catch(() => {
+          // sem servidor: registra só no navegador, como antes
+          const registro = formatarAgora()
+          setDataEdicao(registro)
+          setEdicoes(anteriores => [...anteriores, registro])
+        })
     }
     setAbaAtiva(id)
   }
