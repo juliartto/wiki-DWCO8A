@@ -1,0 +1,40 @@
+{
+  "titulo": "HTML",
+  "abas": [
+    { "id": "artigo", "rotulo": "Artigo" },
+    { "id": "editar", "rotulo": "Editar" },
+    { "id": "historico", "rotulo": "Ver histórico" }
+  ],
+  "secoes": [
+    {
+      "id": "resumo",
+      "titulo": null,
+      "texto": "HTML (abreviação para a expressão inglesa HyperText Markup Language, que significa: \"Linguagem de Marcação de Hipertexto\") é uma linguagem de marcação utilizada na construção de páginas na Web. Documentos HTML podem ser interpretados por navegadores. A tecnologia é fruto da junção entre os padrões HyTime e SGML.",
+      "thumb": {
+        "imagem": "/html_logo.png",
+        "legenda": "Logo da linguagem de marcação HTML"
+      }
+    },
+    {
+      "id": "historia",
+      "titulo": "História",
+      "texto": "Tim Berners-Lee (físico britânico) criou o HTML original (e outros protocolos associados como o HTTP), numa estação NeXTcube, usando o ambiente de desenvolvimento NeXTSTEP. Na época, a linguagem não era uma especificação, mas uma coleção de ferramentas para resolver um problema de Tim: a comunicação e disseminação das pesquisas entre ele e o seu grupo de colegas. A sua solução, combinada com a então emergente internet pública (que tornar-se-ia a Internet), ganhou atenção mundial.",
+      "thumb": null
+    },
+    {
+      "id": "sintaxe",
+      "titulo": "Sintaxe",
+      "texto": "Um documento HTML é organizado em elementos, escritos entre colchetes angulares, como <p> ou <h1>. A maioria vem em pares de tag de abertura e fechamento, com o conteúdo entre elas, e pode receber atributos que ajustam seu comportamento ou aparência.",
+      "thumb": null
+    }
+  ],
+  "rodape": {
+    "prefixo": "Esta página foi editada pela última vez em",
+    "dataInicial": "19 de novembro de 2025, às 23h06min",
+    "sufixo": ". A página foi renderizada com Parsoid."
+  },
+  "historico": {
+    "titulo": "Histórico de edições",
+    "vazio": "Nenhuma edição feita nesta sessão ainda."
+  }
+}
